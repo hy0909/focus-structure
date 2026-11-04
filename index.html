@@ -16,9 +16,12 @@
   --t-title-sm:700 20px/1.4 Pretendard,"Apple SD Gothic Neo",sans-serif;
   --t-subtitle-xl:600 18px/1.4 Pretendard,"Apple SD Gothic Neo",sans-serif;
   --t-subtitle-lg:600 16px/1.5 Pretendard,"Apple SD Gothic Neo",sans-serif;
+  --t-subtitle-md:600 15px/1.467 Pretendard,"Apple SD Gothic Neo",sans-serif;
   --t-subtitle-sm:600 14px/1.429 Pretendard,"Apple SD Gothic Neo",sans-serif;
   --t-label-lg:400 14px/1.429 Pretendard,"Apple SD Gothic Neo",sans-serif;
   --t-label-md:400 13px/1.385 Pretendard,"Apple SD Gothic Neo",sans-serif;
+  --t-body-sm:400 14px/1.571 Pretendard,"Apple SD Gothic Neo",sans-serif;
+  --t-title-md:700 24px/1.4 Pretendard,"Apple SD Gothic Neo",sans-serif;
   --btn-bg:#fff; --code-bg:#f1f3f6; --row-line:#eef0f3; --sel-bg:#1f2430; --sel-fg:#fff; --body-ink:#374151;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -66,29 +69,38 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
 /* ===== 화면 프레임(실제 퍼블리싱 대상) ===== */
 .frame{position:absolute;top:0;left:0;transform-origin:0 0;background:var(--wf-bg);overflow:hidden;
   display:flex;flex-direction:column;container-type:inline-size;container-name:frame;color:#4b5160;font-size:13px}
+.frame button{color:#4b5160}
 
 /* 12칼럼 기준: 좌우 여백 20, 칼럼 사이 20 */
-.gnb{flex:0 0 48px;display:flex;align-items:center;gap:32px;padding:0 20px;background:#fff;border-bottom:1px solid var(--line)}
+.gnb{flex:0 0 48px;display:flex;align-items:center;gap:32px;padding:0 24px;background:#fff;border-bottom:1px solid var(--line)}
 .gnb__logo{font-weight:800;letter-spacing:1px;color:#2a3040;width:110px}
 .gnb__menu{display:flex;gap:6px;flex:1}
-.gnb__menu button{border:0;background:none;padding:12px 12px;color:var(--wf-ink);border-bottom:2px solid transparent}
+.gnb__menu button{border:0;background:none;padding:10px 12px 8px;color:var(--wf-ink);font:var(--t-subtitle-xl);border-bottom:3px solid transparent}
 .gnb__menu button.on{color:#1f2430;font-weight:700;border-color:#2a3040}
-.gnb__util{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--wf-ink);font-variant-numeric:tabular-nums}
+.gnb__util{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--wf-ink);font-variant-numeric:tabular-nums}
 .gnb__util span{min-width:230px;text-align:right}
-.gnb__util i{width:30px;height:30px;border-radius:50%;background:var(--wf-box2);display:block}
+.gnb__util i{width:36px;height:36px;border-radius:50%;background:var(--wf-box2);display:block}
 
 .page-header{flex:0 0 90px;display:flex;align-items:center;justify-content:space-between;padding:20px 20px 28px}
-.page-tab{display:flex;gap:4px}
-.page-tab button{border:0;background:none;font-size:20px;font-weight:700;color:#b5bac3;padding:4px 10px 4px 0}
+.page-tab{display:flex;gap:28px}
+.page-tab button{border:0;background:none;font:var(--t-title-md);color:#b5bac3;padding:0}
 .page-tab button.on{color:#1f2430}
-.toolbar{display:flex;gap:6px;align-items:center}
-.toolbar button{border:1px solid var(--wf-box2);background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;color:#6b7280}
+.toolbar{display:flex;gap:12px;align-items:center}
+.toolbar button{height:26px;min-width:40px;border:1px solid var(--wf-box2);background:#fff;border-radius:4px;padding:0 12px;font:var(--t-label-md);color:#6b7280;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.toolbar button.ico::before{content:"";width:16px;height:16px;border:1.5px solid currentColor;border-radius:3px;box-sizing:border-box}
 .toolbar button.on{background:#2a3040;color:#fff;border-color:#2a3040}
-.toolbar .sep{width:1px;height:18px;background:var(--wf-box2);margin:0 8px}
+.toolbar .sep{width:1px;height:16px;background:var(--wf-box2);margin:0 12px}
 
 .container{flex:1;min-height:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:minmax(0,1fr);column-gap:20px;padding:0 20px 20px}
 .container.top-gap{padding-top:20px}
 .sidebar,.lnb{grid-column:span 2;display:flex;flex-direction:column;min-height:0}
+/* 사이드바 컴포넌트(side): 화면 왼쪽 끝부터 「여백 20 + 2칼럼」. 안쪽 좌우 20, 아래 20 */
+.sidebar.side{margin-left:-20px;padding:0 20px 20px}
+.container.flush{padding-bottom:0}
+.sidebar.side .sidebar__body{margin-bottom:20px}
+/* 스크롤 막대는 오른쪽 안쪽 여백 위에 얹는다 (목록 폭 170 / 277 유지) */
+.sidebar.side .sidebar__body{margin-right:-20px;padding-right:12px}
+.sidebar.side:has(.is-play) .sidebar__body{margin-bottom:0}
 .content{grid-column:span 10;display:flex;flex-direction:column;min-height:0;min-width:0}
 .content.full{grid-column:1 / -1}
 @container frame (max-width:1279px){
@@ -96,59 +108,82 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
   .content{grid-column:span 9}
 }
 .sidebar.boxed{background:#fff;border:1px solid var(--line);border-radius:12px}
-.sidebar__head{flex:0 0 36px;display:flex;align-items:center;padding:0 0 8px;font-size:12px;font-weight:600}
-.sidebar.boxed .sidebar__head{flex-basis:52px;padding:16px 16px 8px}
+.sidebar__head{flex:0 0 20px;display:flex;align-items:center;gap:6px;margin-bottom:8px;font:var(--t-label-lg);color:#94a3b8}
+.sidebar__head b{font:var(--t-subtitle-sm);color:#4b5160}
+.sidebar.boxed .sidebar__head{flex-basis:68px;margin:0;padding:20px;font:var(--t-title-sm);color:#1f2430}
 .sidebar__body{flex:1;min-height:0;overflow:auto;scrollbar-gutter:stable}
-.sidebar.boxed .sidebar__body{padding:0 16px}
-.sidebar__foot{flex:0 0 auto;padding-top:12px}
-.sidebar__foot.is-btn{flex-basis:44px}
-.sidebar__foot.is-play{flex-basis:188px}
-.sidebar.boxed .sidebar__foot.is-btn{flex-basis:60px}
-.sidebar.boxed .sidebar__foot{padding:12px 16px 16px}
-.channel-list{display:flex;flex-direction:column;gap:12px;padding-right:6px}
-.channel-list button{flex:0 0 37px;border:0;background:none;text-align:left;padding:0 4px 0 12px;border-radius:8px;color:#6b7280;font:var(--t-subtitle-xl);letter-spacing:-0.216px}
-.channel-list button::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#9ca3af;margin-right:8px;vertical-align:2px}
-.channel-list button.on{background:#2a3040;color:#fff}
-.btn-line{width:100%;border:1px solid var(--wf-box2);background:#fff;border-radius:6px;padding:7px;font-size:12px;color:#4b5160}
-.btn-fill{border:0;background:#2a3040;color:#fff;border-radius:6px;padding:8px 22px;font-size:12px}
+.sidebar.boxed .sidebar__body{padding:0 20px}
+.sidebar__foot{flex:0 0 auto}
+.sidebar__foot.is-btn{flex-basis:34px}
+.sidebar__foot.is-play{flex-basis:201px;margin:0 -20px -20px}
+.sidebar.boxed .sidebar__foot.is-btn{flex-basis:78px;padding:20px}
+.channel-list{display:flex;flex-direction:column;gap:8px}
+.channel-list button{flex:0 0 40px;border:0;background:none;text-align:left;padding:0 12px;border-radius:8px;color:#6b7280;font:var(--t-title-sm);letter-spacing:0;display:flex;align-items:center}
+.channel-list button::before{content:"";flex:0 0 8px;height:8px;border-radius:50%;background:#9ca3af;margin-right:8px}
+.channel-list button.on{background:#2a3040;color:#fff;padding-right:4px}
+.channel-list button.on::after{content:"›";margin-left:auto;width:24px;text-align:center;font:400 16px/1 Pretendard,sans-serif}
+/* 알고리즘 카드 화면: 제목 없음, 위 16·좌우 16, 줄 사이 12 */
+.sidebar.side.side--all{padding:16px 16px 20px}
+.side--all .channel-list{gap:12px}
+.side--all .channel-list button::before{display:none}
+.btn-line{width:100%;height:34px;border:1px solid var(--wf-box2);background:#fff;border-radius:8px;padding:0 12px;font:var(--t-label-lg);color:#4b5160}
+.btn-fill{height:38px;border:0;background:#2a3040;color:#fff;border-radius:8px;padding:0 22px;font:var(--t-subtitle-md)}
 .btn-fill.wide{width:100%}
-.play-set{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:10px}
-.play-set .row{display:flex;justify-content:space-between;font-size:12px}
-.fake-input{height:30px;border:1px solid var(--wf-box2);border-radius:6px;background:#fff;display:flex;align-items:center;padding:0 10px;font-size:12px;color:#9ca3af}
+.btn-fill.save{width:160px;padding:0}
+.play-set{height:100%;border-top:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:12px}
+.play-set .row{display:flex;justify-content:space-between;align-items:center;font:var(--t-subtitle-sm)}
+.play-set .row span{font:var(--t-label-md);display:flex;align-items:center;gap:6px}
+.play-set .row span::before{content:"";width:16px;height:16px;border-radius:4px;background:var(--wf-box2)}
+.play-set .fake-input{height:30px}
+.play-set .fake-bar{height:6px;border-radius:3px;margin-top:auto}
+.fake-input{height:36px;border:1px solid var(--wf-box2);border-radius:8px;background:#fff;display:flex;align-items:center;padding:0 8px 0 12px;font:var(--t-subtitle-sm);color:#9ca3af}
+.fake-input.select::after{content:"⌄";margin-left:auto;color:#9ca3af}
 .fake-bar{height:4px;border-radius:2px;background:var(--wf-box2);position:relative}
 .fake-bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:30%;background:#2a3040;border-radius:2px}
-.play-ctrl{display:flex;justify-content:center;gap:22px;font-size:16px;color:#4b5160}
+.play-ctrl{display:flex;justify-content:center;align-items:center;gap:36px;font-size:20px;color:#4b5160;height:36px}
 
-.content__head{flex:0 0 32px;padding:0 0 8px;font-size:12px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.content__head{flex:0 0 30px;padding:0 0 12px;font:var(--t-label-md);color:#9ca3af;display:flex;justify-content:space-between;align-items:center}
 .content__body{flex:1;min-height:0;overflow:auto;min-width:0;scrollbar-gutter:stable}
 .content__body.video-body{container-type:size}
 
-.video-grid{display:grid;grid-template-columns:repeat(var(--split-cols,3),minmax(0,1fr));gap:10px;align-content:start}
+.video-grid{display:grid;grid-template-columns:repeat(var(--split-cols,3),minmax(0,1fr));gap:8px;align-content:start}
 /* 스크롤 없을 때: 16:9를 지킨 채 높이에 맞춰 그리드 전체를 줄이고 가운데 둔다 */
-.video-grid.fit{width:min(100%,calc((100cqh - (var(--rows) - 1) * 10px) / var(--rows) * 16 / 9 * var(--split-cols) + (var(--split-cols) - 1) * 10px));margin:0 auto}
+.video-grid.fit{width:min(100%,calc((100cqh - (var(--rows) - 1) * 8px) / var(--rows) * 16 / 9 * var(--split-cols) + (var(--split-cols) - 1) * 8px));margin:0 auto}
 .video-item{background:var(--wf-box);border-radius:8px;position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden}
-.video-item span{position:absolute;left:10px;bottom:8px;font-weight:700;color:#6b7280}
-.video-item.on{outline:2px solid #2a3040}
+.video-item span{position:absolute;left:12px;bottom:8px;font:800 18px/1.385 Pretendard,sans-serif;color:#6b7280}
+.video-item time{position:absolute;right:12px;bottom:10px;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,.08);font:400 11px/1.4 Pretendard,sans-serif;color:#6b7280}
+.video-item em{position:absolute;right:10px;top:8px;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,.08);font:600 11px/1.4 Pretendard,sans-serif;font-style:normal;color:#4b5160}
+.video-item em::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#10b981;margin-right:4px;vertical-align:1px}
+.video-item.on{outline:3px solid #2a3040;outline-offset:-3px}
 
-.player-bar{flex:0 0 104px;padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.player-bar{flex:0 0 104px;padding-top:12px;display:flex;flex-direction:column;gap:6px;position:relative}
+.player-bar .now{position:absolute;right:0;top:12px;height:20px;padding:0 8px;border:1px solid var(--wf-box2);border-radius:10px;font:400 11px/18px Pretendard,sans-serif;color:#6b7280}
+.player-bar .bars{margin-top:24px}
 .player-bar .bars div{height:6px;border-radius:3px;background:var(--wf-box2);margin-bottom:4px}
 .player-bar .ticks{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af}
 .player-bar .dates{height:22px;border-radius:4px;background:var(--wf-box)}
 
-.panel{background:#fff;border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-height:0;flex:1}
-.panel__head{flex:0 0 68px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;display:flex;flex-direction:column;min-height:0;flex:1}
+.panel__head{flex:0 0 68px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px}
 .panel__head .title{font:var(--t-title-sm);color:#1f2430;display:flex;gap:10px;align-items:center}
 .panel__head .title small{color:#9ca3af;font-weight:600}
-.panel__body{flex:1;min-height:0;overflow:auto;padding:0 24px 20px;scrollbar-gutter:stable}
+.panel__body{flex:1;min-height:0;overflow:auto;padding:0 20px 20px;scrollbar-gutter:stable}
 .segment{display:inline-flex;width:250px;background:#f1f3f6;border-radius:8px}
 .segment span{flex:1;text-align:center;padding:4px 0;font:var(--t-subtitle-sm);border-radius:8px;color:#9ca3af}
 .segment span.on{color:#4b5160;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .status{font:var(--t-label-md);letter-spacing:0.25px;color:#6b7280;display:flex;gap:28px}
 .status span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981;margin-right:8px;vertical-align:1px}
+/* 설정 화면 패널: 상단 54, 제목 subtitle/xl, 본문 위 24 */
+.panel--form .panel__head{flex-basis:54px}
+.panel--form .panel__head .title{font:var(--t-subtitle-xl);gap:12px}
+.panel--form .panel__body{padding:24px 20px 20px}
 
 .algo-list{display:flex;flex-direction:column;gap:12px}
 .algo-list{gap:4px!important}
-.algo-item{display:flex;align-items:center;gap:16px;height:80px;padding:8px 8px 8px 0}
+.algo-item{display:flex;align-items:center;gap:16px;height:80px;padding:8px 0 8px 4px}
+.algo-item.event{height:66px}
+.algo-item.event .thumb{width:37px;height:37px;border-radius:6px}
+.algo-item.event .txt small{font:var(--t-label-md)}
 .algo-item .thumb{width:64px;height:64px;border-radius:8px;background:var(--wf-box);flex:0 0 auto}
 .algo-item .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .algo-item .right{display:flex;align-items:center;gap:36px;flex:0 0 auto}
@@ -158,22 +193,26 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
 .toggle::after{content:"";position:absolute;right:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff}
 .toggle.off{background:var(--wf-box2)}
 .toggle.off::after{right:auto;left:3px}
-.algo-item button{height:32px;border:1px solid var(--wf-box2);background:#fff;border-radius:6px;padding:0 12px;font:var(--t-label-lg)}
+.algo-item button{height:32px;border:1px solid var(--wf-box2);background:#fff;border-radius:8px;padding:0 12px;font:var(--t-label-lg);color:#4b5160}
 .algo-item .toggle{width:44px;height:24px;border-radius:12px}
-.algo-item .toggle::after{width:18px;height:18px}
+.algo-item .toggle::after,.field.row .toggle::after{width:18px;height:18px}
 
 .grid12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:20px;align-content:start}
-.video-area{grid-column:span 8;display:flex;flex-direction:column;gap:10px;min-width:0}
-.setting-area{grid-column:span 4;display:flex;flex-direction:column;gap:18px;min-width:0}
-@container frame (max-width:1279px){.video-area{grid-column:span 7}.setting-area{grid-column:span 5}}
+.panel__body.grid12{column-gap:48px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.panel__body.grid12>*{grid-column:auto}
+.video-area{grid-column:span 6;display:flex;flex-direction:column;gap:10px;min-width:0}
+.setting-area{grid-column:span 6;display:flex;flex-direction:column;gap:18px;min-width:0}
 .area-title{display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#1f2430}
 .area-title button{border:1px solid var(--wf-box2);background:#fff;border-radius:6px;padding:3px 10px;font-size:12px}
 .video-big{aspect-ratio:16/9;background:var(--wf-box);border-radius:8px}
 .zone-list{display:flex;flex-direction:column;gap:8px}
-.zone-list div{height:34px;border-radius:6px;background:#f1f3f6;display:flex;align-items:center;padding:0 12px;font-size:12px}
-.field{display:flex;flex-direction:column;gap:6px;font-size:12px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{border:1px solid var(--wf-box2);border-radius:14px;padding:3px 12px;font-size:12px}
+.zone-list div{height:40px;border-radius:6px;background:#f1f3f6;display:flex;align-items:center;padding:0 12px;font-size:12px}
+.field{display:flex;flex-direction:column;gap:4px;font:var(--t-label-md);color:#6b7280}
+.field .req{color:#2a3040;margin-left:2px}
+.field.row{flex-direction:row;justify-content:space-between;align-items:center}
+.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.chips span{height:28px;display:flex;align-items:center;justify-content:center;border:1px solid var(--wf-box2);border-radius:6px;font:var(--t-label-lg)}
+.chips span.empty{border-color:transparent}
 .chips span.on{background:#2a3040;color:#fff;border-color:#2a3040}
 
 .data-table{width:100%;border-collapse:collapse;font-size:12px}
@@ -182,20 +221,24 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
 .data-table th:first-child,.data-table td:first-child{text-align:left;font-weight:600;color:#1f2430}
 .data-table .toggle{display:inline-block;vertical-align:middle}
 
-.filter-form{display:flex;flex-direction:column;gap:16px}
-.result-grid{display:grid;grid-template-columns:repeat(var(--result-cols,4),minmax(0,1fr));gap:10px;padding-right:6px}
+.filter-form{display:flex;flex-direction:column;gap:24px}
+.sidebar.boxed{grid-column:span 3}
+.sidebar.boxed + .content{grid-column:span 9}
+.search-content{padding-top:4px}
+@container frame (min-width:1600px){.search-content{padding-top:20px}}
+.result-grid{display:grid;grid-template-columns:repeat(var(--result-cols,4),minmax(0,1fr));gap:12px}
+.result-grid .video-item{border:1px solid var(--wf-box2)}
 .result-grid .video-item{aspect-ratio:16/9}
-@container frame (max-width:1439px){.result-grid{--result-cols:3}}
+@container frame (max-width:1279px){.result-grid{--result-cols:3}}
 @container frame (min-width:2400px){.result-grid{--result-cols:6}}
 
 .tree-menu{display:flex;flex-direction:column;gap:2px;padding-right:6px}
-.tree-menu .g{display:flex;justify-content:space-between;padding:9px 0;font-weight:700;color:#1f2430;font-size:13px}
+.tree-menu .g{display:flex;justify-content:space-between;padding:0;margin-top:14px;font:var(--t-subtitle-lg);color:#1f2430}
+.tree-menu .g:first-child{margin-top:0}
 .tree-menu .g::after{content:"⌄";color:#9ca3af}
-.tree-menu button{border:0;background:none;text-align:left;padding:7px 10px;border-radius:6px;font-size:12px;color:#6b7280}
+.tree-menu button{border:0;background:none;text-align:left;padding:7px 12px;border-radius:8px;font:var(--t-body-sm);color:#6b7280}
 .tree-menu button.on{background:#2a3040;color:#fff}
-.form{display:flex;flex-direction:column;gap:18px}
-.form .field{grid-column:span 4}
-@container frame (max-width:1279px){.form .field{grid-column:span 6}}
+.form{display:flex;flex-direction:column;gap:36px;width:275px}
 .placeholder{height:100%;min-height:200px;border:2px dashed var(--wf-box2);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-weight:600}
 
 .frame ::-webkit-scrollbar{width:8px;height:8px}
@@ -262,7 +305,7 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
     <div class="card">
       <h2>12칼럼 그리드 수치</h2>
       <div class="gridnum" id="gridNum"></div>
-      <p class="note" style="margin-top:8px">피그마 1280·1920 화면을 재 보면 좌우 여백 20, 칼럼 사이 20, 사이드바 2칼럼 + 콘텐츠 10칼럼으로 맞아떨어집니다.</p>
+      <p class="note" style="margin-top:8px">피그마 1280·1920 화면을 재 보면 좌우 여백 20, 칼럼 사이 20, 콘텐츠 10칼럼으로 맞아떨어집니다. 사이드바는 side 컴포넌트라 화면 왼쪽 끝에서 시작하고, 너비는 여백 20 + 2칼럼(1280: 210, 1920: 317)입니다. 안쪽 좌우 20을 빼면 목록 폭은 170 / 277입니다.</p>
     </div>
     <div class="card">
       <h2>이 화면의 영역 이름</h2>
@@ -270,12 +313,13 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
       <p class="note" style="margin-top:8px">크기는 지금 고른 너비에서 실제로 잰 px 값입니다.</p>
     </div>
     <div class="card">
-      <h2>알고리즘 카드 글자 스타일</h2>
+      <h2>사이드바·알고리즘 카드 글자 스타일</h2>
       <div class="legend-wrap"><table class="legend">
         <tr><th>쓰는 곳</th><th>스타일</th><th>크기</th></tr>
-        <tr><td>채널 목록 CH01</td><td><code>subtitle/xl</code></td><td>18 SemiBold</td></tr>
+        <tr><td>사이드바 제목 「채널」</td><td><code>label/lg</code></td><td>14 Regular</td></tr>
+        <tr><td>사이드바 개수 「8」</td><td><code>subtitle/sm</code></td><td>14 SemiBold</td></tr>
+        <tr><td>채널 목록 CH01</td><td><code>title/sm</code></td><td>20 Bold</td></tr>
         <tr><td>패널 제목 CH01</td><td><code>title/sm</code></td><td>20 Bold</td></tr>
-        <tr><td>설정·통계·이력 탭</td><td><code>subtitle/sm</code></td><td>14 SemiBold</td></tr>
         <tr><td>카메라 녹화 장치(NVR)·AI 엔진</td><td><code>label/md</code></td><td>13 Regular</td></tr>
         <tr><td>목록 제목 사람/차량(SMD)</td><td><code>subtitle/lg</code></td><td>16 SemiBold</td></tr>
         <tr><td>목록 설명</td><td><code>label/lg</code></td><td>14 Regular</td></tr>
@@ -288,12 +332,13 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
         <tr><th>영역</th><th>높이</th></tr>
         <tr><td>GNB</td><td>48px 고정</td></tr>
         <tr><td>페이지 헤더</td><td>90px 고정</td></tr>
-        <tr><td>사이드바 상단</td><td>36px 고정 (박스형 52px)</td></tr>
-        <tr><td>사이드바 하단</td><td>버튼 44px, 재생 설정 188px</td></tr>
-        <tr><td>콘텐츠 상단</td><td>32px 고정</td></tr>
+        <tr><td>사이드바 위 / 아래 여백</td><td>위 0 (알고리즘 화면 16), 아래 20</td></tr>
+        <tr><td>사이드바 상단</td><td>20px 고정, 목록까지 8px (박스형 68px)</td></tr>
+        <tr><td>사이드바 하단</td><td>버튼 34px + 아래 20, 재생 설정 201px (박스형 78px)</td></tr>
+        <tr><td>콘텐츠 상단</td><td>18px + 아래 12px</td></tr>
         <tr><td>패널 상단</td><td>68px 고정</td></tr>
         <tr><td>재생 바</td><td>104px 고정</td></tr>
-        <tr><td>채널 한 줄</td><td>37px 고정, 줄 사이 12px</td></tr>
+        <tr><td>채널 한 줄</td><td>40px 고정, 줄 사이 8px (알고리즘 화면 12px)</td></tr>
         <tr><td>알고리즘 한 줄</td><td>80px 고정, 줄 사이 4px</td></tr>
         <tr><td>영상·검색 썸네일</td><td>항상 16:9 (aspect-ratio)</td></tr>
         <tr><td>스크롤 본문</td><td>scrollbar-gutter: stable</td></tr>
@@ -305,10 +350,10 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
       <table class="legend">
         <tr><th>너비</th><th>사이드바 / 콘텐츠</th><th>검색 결과 열</th></tr>
         <tr><td>1080</td><td>3 / 9칼럼</td><td>3열</td></tr>
-        <tr><td>1280</td><td>2 / 10칼럼</td><td>3열</td></tr>
-        <tr><td>1440</td><td>2 / 10칼럼</td><td>4열</td></tr>
-        <tr><td>1920</td><td>2 / 10칼럼</td><td>4열</td></tr>
-        <tr><td>2560 이상</td><td>2 / 10칼럼</td><td>6열</td></tr>
+        <tr><td>1280</td><td>2 / 10칼럼 (검색 3 / 9)</td><td>4열</td></tr>
+        <tr><td>1440</td><td>2 / 10칼럼 (검색 3 / 9)</td><td>4열</td></tr>
+        <tr><td>1920</td><td>2 / 10칼럼 (검색 3 / 9)</td><td>4열</td></tr>
+        <tr><td>2560 이상</td><td>2 / 10칼럼 (검색 3 / 9)</td><td>6열</td></tr>
       </table>
       <p class="note" style="margin-top:8px">피그마에는 1280·1920만 있습니다. 1080·1440·2560 규칙은 제안값이라 확정이 필요합니다(TBD).</p>
     </div>
@@ -319,7 +364,7 @@ table.legend code{font-size:11.5px;background:var(--code-bg);padding:1px 4px;bor
 const AREAS = {
   'gnb':           {lv:1, name:'GNB', cls:'.gnb', c:'var(--c-gnb)', desc:'모든 화면 맨 위 공통 메뉴'},
   'page-header':   {lv:1, name:'페이지 헤더', cls:'.page-header', c:'var(--c-page-header)', desc:'GNB 아래. 하위 탭과 화면 도구'},
-  'sidebar':       {lv:1, name:'사이드바', cls:'.sidebar', c:'var(--c-sidebar)', desc:'좌측 2칼럼. 채널 목록·검색 조건'},
+  'sidebar':       {lv:1, name:'사이드바', cls:'.sidebar', c:'var(--c-sidebar)', desc:'화면 왼쪽 끝부터 여백+2칼럼(side 컴포넌트). 검색은 3칼럼 박스'},
   'lnb':           {lv:1, name:'LNB', cls:'.lnb', c:'var(--c-lnb)', desc:'설정 화면 좌측 메뉴 트리'},
   'content':       {lv:1, name:'콘텐츠 영역', cls:'.content', c:'var(--c-content)', desc:'우측 10칼럼. 화면 본문'},
   'gnb-logo':      {lv:2, name:'로고', cls:'.gnb__logo', c:'var(--c-l2)'},
@@ -327,7 +372,7 @@ const AREAS = {
   'gnb-util':      {lv:2, name:'유틸 영역', cls:'.gnb__util', c:'var(--c-l2)', desc:'시스템 상태·사용자'},
   'page-tab':      {lv:2, name:'페이지 탭', cls:'.page-tab', c:'var(--c-l2)'},
   'toolbar':       {lv:2, name:'툴바', cls:'.toolbar', c:'var(--c-l2)', desc:'분할·확대 같은 화면 도구'},
-  'sidebar-head':  {lv:2, name:'사이드바 상단', cls:'.sidebar__head', c:'var(--c-l2)', desc:'제목. 높이 고정'},
+  'sidebar-head':  {lv:2, name:'사이드바 상단', cls:'.sidebar__head', c:'var(--c-l2)', desc:'「채널 8」 제목. 20px 고정'},
   'sidebar-body':  {lv:2, name:'사이드바 본문', cls:'.sidebar__body', c:'var(--c-l2)', desc:'따로 스크롤'},
   'sidebar-foot':  {lv:2, name:'사이드바 하단', cls:'.sidebar__foot', c:'var(--c-l2)', desc:'하단 고정 버튼'},
   'content-head':  {lv:2, name:'콘텐츠 상단', cls:'.content__head', c:'var(--c-l2)'},
@@ -340,8 +385,8 @@ const AREAS = {
   'play-set':      {lv:3, name:'재생 설정', cls:'.play-set', c:'var(--c-l3)'},
   'video-grid':    {lv:3, name:'영상 그리드', cls:'.video-grid', c:'var(--c-l3)', desc:'자체 열 규칙. 타일은 항상 16:9'},
   'algo-list':     {lv:3, name:'알고리즘 목록', cls:'.algo-list', c:'var(--c-l3)'},
-  'video-area':    {lv:3, name:'영상 영역', cls:'.video-area', c:'var(--c-l3)', desc:'패널 안 8칼럼'},
-  'setting-area':  {lv:3, name:'설정 영역', cls:'.setting-area', c:'var(--c-l3)', desc:'패널 안 4칼럼'},
+  'video-area':    {lv:3, name:'영상 영역', cls:'.video-area', c:'var(--c-l3)', desc:'패널 안 6칼럼'},
+  'setting-area':  {lv:3, name:'설정 영역', cls:'.setting-area', c:'var(--c-l3)', desc:'패널 안 6칼럼'},
   'data-table':    {lv:3, name:'데이터 표', cls:'.data-table', c:'var(--c-l3)'},
   'filter-form':   {lv:3, name:'검색 조건 폼', cls:'.filter-form', c:'var(--c-l3)'},
   'result-grid':   {lv:3, name:'결과 그리드', cls:'.result-grid', c:'var(--c-l3)'},
@@ -379,33 +424,35 @@ function channelList(n){
 /* ----- 카메라 영상 ----- */
 function camera(){
   if(!['live','play'].includes(S.sub)) S.sub='live';
-  const tools = [1,4,9,16].map(n=>`<button data-split="${n}" class="${S.split===n?'on':''}">${n}</button>`).join('')
-    + `<button data-split="0" class="${S.split===0?'on':''}">전체</button><span class="sep"></span><button>확대</button>`;
+  if(![1,4,9,0].includes(S.split)) S.split=9;
+  const tools = [1,4,9].map(n=>`<button data-split="${n}" class="${S.split===n?'on':''}">${n}</button>`).join('')
+    + `<button data-split="0" class="${S.split===0?'on':''}">전체 보기</button><span class="sep"></span><button class="ico">전체 화면</button>`;
   const chCount = many()?24:6;
   const tiles = S.split===0 ? chCount : S.split;
   const cols = S.split===0 ? 4 : Math.sqrt(S.split);
   const play = S.sub==='play';
   return pageHeader([['live','실시간'],['play','재생']], tools) + `
-  <div class="container">
-    <aside class="sidebar" ${A('sidebar')}>
-      <div class="sidebar__head" ${A('sidebar-head')}>채널 ${chCount}</div>
+  <div class="container flush">
+    <aside class="sidebar side" ${A('sidebar')}>
+      <div class="sidebar__head" ${A('sidebar-head')}>채널 <b>${chCount}</b></div>
       <div class="sidebar__body" ${A('sidebar-body')}>${channelList(chCount)}</div>
       <div class="sidebar__foot ${play?'is-play':'is-btn'}" ${A('sidebar-foot')}>${play ? `
         <div class="play-set" ${A('play-set')}>
-          <div class="row"><b>재생 설정</b><span>☑ 스킵 플레이</span></div>
-          <div class="fake-input">2026-09-22</div>
-          <div class="fake-bar"></div>
+          <div class="row"><b>재생 설정</b><span>스킵 플레이</span></div>
+          <div class="fake-input">▦ 2026-09-22 13:32</div>
           <div class="play-ctrl">⏪ ▶ ⏩</div>
+          <div class="fake-bar"></div>
         </div>` : `<button class="btn-line">카메라 방향 조절(PTZ)</button>`}
       </div>
     </aside>
     <main class="content" ${A('content')}>
       <div class="content__body video-body" ${A('content-body')}>
         <div class="video-grid ${many()?'':'fit'}" style="--split-cols:${cols};--rows:${Math.ceil(tiles/cols)}" ${A('video-grid')}>
-          ${range(tiles).map(i=>`<div class="video-item ${i===S.ch?'on':''}"><span>CH${pad(i+1)}</span></div>`).join('')}
+          ${range(tiles).map(i=>`<div class="video-item ${i===S.ch?'on':''}">${play?'':'<em>실시간</em>'}<span>CH${pad(i+1)}</span><time>2026-09-22 17:13:43</time></div>`).join('')}
         </div>
       </div>
       ${play ? `<div class="player-bar" ${A('player-bar')}>
+        <span class="now">18:02:14</span>
         <div class="bars"><div></div><div></div></div>
         <div class="ticks">${['0H','2H','4H','6H','8H','10H','12H','14H','16H','18H','20H','22H'].map(t=>`<span>${t}</span>`).join('')}</div>
         <div class="dates"></div></div>`:''}
@@ -417,26 +464,26 @@ function camera(){
 function ai(){
   if(S.detail==='algo') return aiAlgoDetail();
   if(S.detail==='all') return aiAll();
-  if(!['card','db','model'].includes(S.sub)) S.sub='card';
-  const head = pageHeader([['card','알고리즘 카드'],['db','데이터베이스 관리'],['model','모델 관리']]);
-  if(S.sub!=='card') return head + `<div class="container"><main class="content full" ${A('content')}><div class="placeholder">${S.sub==='db'?'데이터베이스 관리':'모델 관리'} 화면은 아직 피그마에 없습니다 (TBD)</div></main></div>`;
-  const chCount = many()?24:6, algo = many()?14:4;
+  if(!['card','model'].includes(S.sub)) S.sub='card';
+  const head = pageHeader([['card','알고리즘 카드'],['model','모델 관리']]);
+  if(S.sub!=='card') return head + `<div class="container"><main class="content full" ${A('content')}><div class="placeholder">모델 관리 화면은 아직 피그마에 없습니다 (TBD)</div></main></div>`;
+  const chCount = many()?24:6, algo = many()?9:3, events = many()?7:1;
   return head + `
   <div class="container">
-    <aside class="sidebar" ${A('sidebar')}>
+    <aside class="sidebar side side--all" ${A('sidebar')}>
       <div class="sidebar__body" ${A('sidebar-body')}>${channelList(chCount)}</div>
-      <div class="sidebar__foot is-btn" ${A('sidebar-foot')}><button class="btn-line" data-detail="all" style="font:var(--t-label-lg)">전체 채널 설정</button></div>
+      <div class="sidebar__foot is-btn" ${A('sidebar-foot')}><button class="btn-line" data-detail="all">전체 채널 설정</button></div>
     </aside>
     <main class="content" ${A('content')}>
       <section class="panel" ${A('panel')}>
         <div class="panel__head" ${A('panel-head')}>
           <div class="title">CH${pad(S.ch+1)}</div>
-          <div class="segment"><span class="on">설정</span><span>통계</span><span>이력</span></div>
-          <div class="status"><span>● 카메라 녹화 장치(NVR)</span><span>● AI 엔진</span></div>
+          <div class="status"><span>카메라 녹화 장치(NVR)</span><span>AI 엔진</span></div>
         </div>
         <div class="panel__body" ${A('panel-body')}>
           <div class="algo-list" ${A('algo-list')}>
             ${range(algo).map(i=>`<div class="algo-item"><div class="thumb"></div><div class="txt"><b>사람/차량(SMD)</b><small>사람·차량 이동체 검출(Smart Motion Detection)</small></div><div class="right"><div class="toggle ${i%4===2?'off':''}"></div><button data-detail="algo">설정</button></div></div>`).join('')}
+            ${range(events).map(i=>`<div class="algo-item event"><div class="thumb"></div><div class="txt"><b>${['라인 크로싱','배회 감지','침입/이탈','군중 밀집도','PPE 감지','화재 감지','카운팅'][i]}</b><small>이벤트 알고리즘</small></div><div class="right"><div class="toggle"></div></div></div>`).join('')}
           </div>
         </div>
       </section>
@@ -446,7 +493,7 @@ function ai(){
 function backHead(title, sub){
   return `<div class="panel__head" ${A('panel-head')}>
     <div class="title"><button data-detail="" style="border:0;background:none;font-size:16px">‹</button>${title} ${sub?`<small>/ ${sub}</small>`:''}</div>
-    <button class="btn-fill">저장</button></div>`;
+    <button class="btn-fill save">저장</button></div>`;
 }
 function aiAlgoDetail(){
   const zones = many()?8:2;
@@ -493,23 +540,23 @@ function aiAll(){
 
 /* ----- AI 검색 ----- */
 function search(){
-  const filters = many()?['분류','기간','채널','성별/연령대','상/하의 색상','액세서리','차종','차량 색상','번호판','이벤트 종류']:['분류','기간','채널'];
-  const results = many()?40:8;
+  const filters = many()?['분류','기간','채널','성별/연령대','상/하의 색상','액세서리']:['분류','기간','채널'];
+  const results = many()?20:8;
   return `<div class="container top-gap">
     <aside class="sidebar boxed" ${A('sidebar')}>
       <div class="sidebar__head" ${A('sidebar-head')}>검색 조건</div>
       <div class="sidebar__body" ${A('sidebar-body')}>
         <div class="filter-form" ${A('filter-form')}>
-          ${filters.map((f,i)=> i===0 ? `<div class="field">${f} *<div class="chips"><span class="on">얼굴</span><span>사람</span><span>차량</span><span>이벤트</span><span>패턴</span></div></div>`
-            : `<div class="field">${f}<div class="fake-input">전체</div></div>`).join('')}
+          ${filters.map((f,i)=> i===0 ? `<div class="field"><span>${f}<i class="req">*</i></span><div class="chips"><span class="on">얼굴</span><span>사람</span><span>차량</span><span>이벤트</span><span>패턴</span><span class="empty"></span></div></div>`
+            : `<div class="field"><span>${f}${i===1?'<i class="req">*</i>':''}</span><div class="fake-input select">전체</div></div>`).join('')}
         </div>
       </div>
       <div class="sidebar__foot is-btn" ${A('sidebar-foot')}><button class="btn-fill wide">검색</button></div>
     </aside>
-    <main class="content" ${A('content')}>
-      <div class="content__head" ${A('content-head')}>검색 결과 ${results}</div>
+    <main class="content search-content" ${A('content')}>
+      <div class="content__head" ${A('content-head')}>검색 결과 ${many()?47:results}</div>
       <div class="content__body" ${A('content-body')}>
-        <div class="result-grid" ${A('result-grid')}>${range(results).map(i=>`<div class="video-item"><span>CH${pad(i%9+1)}</span></div>`).join('')}</div>
+        <div class="result-grid" ${A('result-grid')}>${range(results).map(i=>`<div class="video-item"><span>CH${pad(i%9+1)}</span><time>2026-09-22 17:13:43</time></div>`).join('')}</div>
       </div>
     </main>
   </div>`;
@@ -519,7 +566,7 @@ function search(){
 function settings(){
   const groups = [['시스템',['일반','시간','사용자']],['장치',['카메라','오디오','환경 센서']],['이벤트',['알림','규칙']],['녹화',['일정','저장소']],['네트워크',['IP','포트']],['로그',['시스템 로그','접속 기록']]];
   const shown = many()?groups:groups.slice(0,3);
-  const fields = many()?['이름','프라이버시 설정','카메라 설정(밝기/대비/색상)','해상도','프레임','비트레이트','코덱','녹화 품질','오디오','시간 표시','OSD 위치','숨김']:['이름','프라이버시 설정','숨김'];
+  const fields = many()?['이름','프라이버시 설정','카메라 설정(밝기/대비/색상)','해상도','프레임','비트레이트','코덱','녹화 품질','숨김']:['이름','프라이버시 설정','카메라 설정(밝기/대비/색상)','숨김'];
   return `<div class="container top-gap">
     <aside class="lnb" ${A('lnb')}>
       <div class="sidebar__body" ${A('sidebar-body')}>
@@ -529,11 +576,11 @@ function settings(){
       </div>
     </aside>
     <main class="content" ${A('content')}>
-      <section class="panel" ${A('panel')}>
+      <section class="panel panel--form" ${A('panel')}>
         ${backHead(S.setItem==='카메라'?'CH03':S.setItem,'')}
         <div class="panel__body" ${A('panel-body')}>
-          <div class="form grid12" ${A('form')} style="row-gap:18px">
-            ${fields.map(f=> f==='숨김' ? `<div class="field">${f}<div class="toggle"></div></div>` : `<div class="field">${f}<div class="fake-input">${f==='이름'?'이름을 작성하세요':'전체'}</div></div>`).join('')}
+          <div class="form" ${A('form')}>
+            ${fields.map(f=> f==='숨김' ? `<div class="field row">${f}<div class="toggle" style="width:44px;height:24px;border-radius:12px"></div></div>` : `<div class="field">${f}<div class="fake-input ${f==='이름'?'':'select'}">${f==='이름'?'이름을 작성하세요':'전체'}</div></div>`).join('')}
           </div>
         </div>
       </section>
