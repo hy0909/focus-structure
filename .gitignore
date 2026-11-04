@@ -1,0 +1,6 @@
+# 공개 저장소에는 화면 구조 페이지만 올린다
+/*
+!/index.html
+!/.gitignore
+!/.nojekyll
+!/README.md
