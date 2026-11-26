@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 배경 미리보기</title>
+<link rel="stylesheet" href="login-background.css">
+<style>html, body { height: 100%; margin: 0; background: #090d19; }</style>
+<!-- 배경 마크업: body 맨 앞에 두고, 화면 내용은 z-index 1 이상으로 위에 올린다 -->
+<div class="login-background" aria-hidden="true">
+  <div class="login-background__stage">
+    <span class="login-background__light login-background__light--blue"></span>
+    <span class="login-background__light login-background__light--sky"></span>
+    <span class="login-background__light login-background__light--teal"></span>
+    <span class="login-background__light login-background__light--bottom-right"></span>
+    <span class="login-background__light login-background__light--bottom-left"></span>
+  </div>
+</div>
+<script src="login-background.js"></script>
